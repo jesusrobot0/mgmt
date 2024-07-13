@@ -1,3 +1,10 @@
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./router";
+
 export function MgmtApp() {
-  return <h1>MgmtApp</h1>;
+  return (
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
+  );
 }
