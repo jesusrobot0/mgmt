@@ -1,8 +1,8 @@
-export function Logo() {
+export function Logo({ width = 73 }) {
   return (
     <svg
       id="logo-14"
-      width="73"
+      width={width}
       height="49"
       viewBox="0 0 73 49"
       fill="none"
