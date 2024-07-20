@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export function Logo({ width = 73 }) {
   return (
     <svg
@@ -27,3 +29,7 @@ export function Logo({ width = 73 }) {
     </svg>
   );
 }
+
+Logo.propTypes = {
+  width: PropTypes.number,
+};
