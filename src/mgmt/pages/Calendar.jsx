@@ -1,15 +1,15 @@
 import { Calendar } from "react-big-calendar";
 import { addHours } from "date-fns";
-import { Navbar } from "../components";
+import { CalendarEvent, Navbar } from "../components";
 import { localizer, getMessagesES } from "../../helpers";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const events = [
   {
-    title: "Cumpleaños",
+    title: "Cumpleaños del Jefe",
     notes: "Hay que comprar pastel",
     start: new Date(),
-    end: addHours(new Date(), 1),
+    end: addHours(new Date(), 2),
     bgColor: "#fafafa",
     user: {
       _id: "123",
@@ -19,9 +19,9 @@ const events = [
 ];
 
 export function CalendarPage() {
+  // Esta función hace que el estilo de los eventos cambie!
+  // eslint-disable-next-line no-unused-vars
   const eventStyleGetter = (event, start, end, isSelected) => {
-    console.log({ event, start, end, isSelected });
-
     const style = {
       backgroundColor: "#327cf7",
       borderRadius: "0px",
@@ -44,6 +44,9 @@ export function CalendarPage() {
         style={{ height: "calc(100vh - 78px)" }}
         messages={getMessagesES()}
         eventPropGetter={eventStyleGetter}
+        components={{
+          event: CalendarEvent,
+        }}
       />
     </div>
   );
