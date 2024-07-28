@@ -1,9 +1,11 @@
-import { addHours } from "date-fns";
 import { useState } from "react";
 import Modal from "react-modal";
-import DatePicker from "react-datepicker";
-
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { addHours } from "date-fns";
+import { es } from "date-fns/locale/es";
+
+registerLocale("es", es);
 
 const customStyles = {
   content: {
@@ -84,6 +86,9 @@ export function CelendarModal() {
             className="border w-full border-gray-400 p-2 rounded-md"
             onChange={(event) => handleDateChange(event, "start")}
             dateFormat="Pp"
+            showTimeSelect
+            locale="es"
+            timeCaption="Hora"
           />
         </label>
         <label className="flex flex-col gap-2">
@@ -94,6 +99,9 @@ export function CelendarModal() {
             className="border w-full border-gray-400 p-2 rounded-md"
             onChange={(event) => handleDateChange(event, "end")}
             dateFormat="Pp"
+            showTimeSelect
+            locale="es"
+            timeCaption="Hora"
           />
         </label>
 
