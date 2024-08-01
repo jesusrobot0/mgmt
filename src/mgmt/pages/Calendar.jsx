@@ -4,13 +4,14 @@ import { CalendarEvent, CelendarModal, Navbar } from "../components";
 import { localizer, getMessagesES } from "../../helpers";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState } from "react";
+import { useUIStore } from "../../hooks/useUIStore";
 
 const events = [
   {
     title: "Cumpleaños del Jefe Maestro",
     notes: "Hay que comprar pastel",
     start: new Date(),
-    end: addHours(new Date(), 2),
+    end: addHours(new Date(), 1),
     bgColor: "#fafafa",
     user: {
       _id: "123",
@@ -20,6 +21,7 @@ const events = [
 ];
 
 export function CalendarPage() {
+  const { openDateModal } = useUIStore();
   const [view, setView] = useState(() => {
     const viewSelected = window.localStorage.getItem("view");
 
@@ -29,6 +31,7 @@ export function CalendarPage() {
 
     return viewSelected;
   });
+
   // Esta función hace que el estilo de los eventos cambie!
   // eslint-disable-next-line no-unused-vars
   const eventStyleGetter = (event, start, end, isSelected) => {
@@ -42,8 +45,8 @@ export function CalendarPage() {
     return { style };
   };
 
-  const handleDoubleClick = (event) => {
-    console.log({ doubleClick: event });
+  const handleDoubleClick = () => {
+    openDateModal();
   };
 
   const handleSelect = (event) => {

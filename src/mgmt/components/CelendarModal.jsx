@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addHours, differenceInSeconds } from "date-fns";
 import { es } from "date-fns/locale/es";
 import Swal from "sweetalert2";
+import { useUIStore } from "../../hooks/useUIStore";
 
 registerLocale("es", es);
 
@@ -29,11 +30,11 @@ const initialState = {
 Modal.setAppElement("#root");
 
 export function CelendarModal() {
-  const [isOpen, setisOpen] = useState(true);
+  const { isDateModalOpen, closeDateModal } = useUIStore();
   const [formValues, setFormValues] = useState(initialState);
 
   const handleCloseModal = () => {
-    setisOpen(false);
+    closeDateModal();
   };
 
   const handleInputChange = (event) => {
@@ -75,7 +76,7 @@ export function CelendarModal() {
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={isDateModalOpen}
       onRequestClose={handleCloseModal}
       style={customStyles}
       overlayClassName="modal-fondo"
