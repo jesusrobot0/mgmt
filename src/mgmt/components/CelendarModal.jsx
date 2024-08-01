@@ -2,8 +2,9 @@ import { useState } from "react";
 import Modal from "react-modal";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { addHours } from "date-fns";
+import { addHours, differenceInSeconds } from "date-fns";
 import { es } from "date-fns/locale/es";
+import Swal from "sweetalert2";
 
 registerLocale("es", es);
 
@@ -50,6 +51,28 @@ export function CelendarModal() {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const { start, end, title } = formValues;
+
+    const dateDifference = differenceInSeconds(end, start);
+
+    if (isNaN(dateDifference) || dateDifference <= 0) {
+      console.log("error en fechas");
+      Swal.fire("Fechas incorrectas", "Revisa las fechas ingresadas", "error");
+      return;
+    }
+
+    if (title.length <= 0) {
+      return;
+    }
+
+    // todo: cerrar modal
+    // todo: reestablecer el formulario
+    // todo: remover erroresen pantalla
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -59,7 +82,7 @@ export function CelendarModal() {
       closeTimeoutMS={200}
     >
       <h1 className="text-3xl text-[#222] mb-4">Agregar evento</h1>
-      <form className="w-[400px] flex flex-col gap-6">
+      <form className="w-[400px] flex flex-col gap-6" onSubmit={handleSubmit}>
         <label className="flex flex-col gap-2">
           <span>Título</span>
           <input
@@ -106,7 +129,7 @@ export function CelendarModal() {
         </label>
 
         <input
-          type="button"
+          type="submit"
           className="mt-6 p-3 text-white font-bold rounded-md bg-[#007aff] w-[200px] cursor-pointer"
           value="Guardar"
         />
